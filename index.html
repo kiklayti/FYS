@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#08090b">
+  <meta name="format-detection" content="telephone=no">
+  <title>FYS SHOP</title>
+
+  <!-- Telegram WebApp SDK: подключается первым, до остальных скриптов -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Серебряный градиент для SVG-иконок -->
+  <svg class="defs" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="gSilver" gradientUnits="userSpaceOnUse" x1="3" y1="3" x2="21" y2="21">
+        <stop offset="0" stop-color="#ffffff"/>
+        <stop offset=".35" stop-color="#b6bac1"/>
+        <stop offset=".58" stop-color="#f1f2f4"/>
+        <stop offset="1" stop-color="#868b93"/>
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <div class="ambient" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <button class="brand" data-action="go" data-tab="home" aria-label="FYS SHOP — на главную">
+        <span class="brand-mark">FYS</span><span class="brand-sub">SHOP</span>
+      </button>
+      <div class="topbar-right">
+        <span class="pill">DEMO</span>
+        <button class="avatar-btn" id="topAvatar" data-action="go" data-tab="profile" aria-label="Профиль"></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="app">
+    <!-- ГЛАВНАЯ -->
+    <section class="view" data-view="home">
+      <div class="card hero">
+        <div class="hero-ring" aria-hidden="true"></div>
+        <div class="hero-ring r2" aria-hidden="true"></div>
+        <div class="hero-kicker"><span class="dot"></span>Premium digital store</div>
+        <h1 class="hero-title"><span class="metal-text">FYS</span><br><span class="metal-text">SHOP</span></h1>
+        <p class="hero-sub">Цифровые подписки и&nbsp;инструменты для трейдинга — покупка в&nbsp;пару касаний прямо в&nbsp;Telegram.</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary shine" data-action="scroll-catalog">Смотреть каталог<span data-icon="arrow"></span></button>
+          <button class="btn btn-ghost btn-icon" data-action="go" data-tab="cart" aria-label="Корзина"><span data-icon="bag"></span></button>
+        </div>
+        <div class="hero-stats">
+          <div><strong data-stat="products">3</strong><span>товара</span></div>
+          <div><strong>24/7</strong><span>поддержка</span></div>
+          <div><strong>2&nbsp;мин</strong><span>оформление</span></div>
+        </div>
+      </div>
+
+      <div class="perks">
+        <div class="card perk"><div class="perk-ico" data-icon="shield"></div><b>Безопасно</b><span>через Telegram</span></div>
+        <div class="card perk"><div class="perk-ico" data-icon="bolt"></div><b>Быстро</b><span>выдача в чате</span></div>
+        <div class="card perk"><div class="perk-ico" data-icon="chat"></div><b>Поддержка</b><span>всегда на связи</span></div>
+      </div>
+
+      <section class="section" id="catalog">
+        <div class="section-kicker">Каталог</div>
+        <h2 class="section-title">Подписки и инструменты</h2>
+        <div class="chips" id="chips" role="tablist"></div>
+        <div class="products" id="products"></div>
+      </section>
+
+      <section class="section">
+        <div class="section-kicker">Как купить</div>
+        <h2 class="section-title">Три простых шага</h2>
+        <div class="steps">
+          <div class="card step"><div class="step-num">1</div><div><b>Выберите товар</b><span>Нажмите «Купить» или добавьте в корзину</span></div></div>
+          <div class="card step"><div class="step-num">2</div><div><b>Оплатите заказ</b><span>Карта, СБП или USDT (сейчас — демо)</span></div></div>
+          <div class="card step"><div class="step-num">3</div><div><b>Получите доступ</b><span>Данные придут сообщением от бота</span></div></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-kicker">FAQ</div>
+        <h2 class="section-title">Частые вопросы</h2>
+        <div class="faq">
+          <div class="card"><details>
+            <summary>Это настоящая оплата?<span data-icon="plus"></span></summary>
+            <p>Нет. Магазин работает в демо-режиме: заказы сохраняются, но деньги не списываются.</p>
+          </details></div>
+          <div class="card"><details>
+            <summary>Как я получу товар?<span data-icon="plus"></span></summary>
+            <p>В рабочей версии бот пришлёт данные для активации в чат сразу после оплаты.</p>
+          </details></div>
+          <div class="card"><details>
+            <summary>Где хранятся мои заказы?<span data-icon="plus"></span></summary>
+            <p>В облаке Telegram (CloudStorage). Они привязаны к вашему аккаунту и видны на всех ваших устройствах.</p>
+          </details></div>
+          <div class="card"><details>
+            <summary>Сколько стоит индикатор?<span data-icon="plus"></span></summary>
+            <p>Цена зависит от срока подписки. Нажмите «Узнать цену» — менеджер ответит в Telegram.</p>
+          </details></div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <span class="brand-mark">FYS</span>
+        <p>© 2026 FYS SHOP · демо-версия</p>
+      </footer>
+    </section>
+
+    <!-- КОРЗИНА (рисуется из app.js) -->
+    <section class="view" data-view="cart" id="view-cart" hidden></section>
+
+    <!-- ПРОФИЛЬ (рисуется из app.js) -->
+    <section class="view" data-view="profile" id="view-profile" hidden></section>
+  </main>
+
+  <nav class="tabbar" aria-label="Навигация">
+    <div class="tabbar-inner">
+      <button class="tab active" data-action="go" data-tab="home"><span data-icon="home"></span>Главная</button>
+      <button class="tab" data-action="go" data-tab="cart"><span data-icon="bag"></span>Корзина<i class="badge" id="cartBadge" hidden>0</i></button>
+      <button class="tab" data-action="go" data-tab="profile"><span data-icon="user"></span>Профиль</button>
+    </div>
+  </nav>
+
+  <div class="backdrop" id="backdrop" data-action="close-sheet"></div>
+  <div class="sheet" id="sheet" role="dialog" aria-modal="true">
+    <div class="sheet-handle"></div>
+    <div id="sheetBody"></div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
